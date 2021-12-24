@@ -11,15 +11,18 @@ let package = Package(
     products: [
         .library(
             name: "LightChart",
-            targets: ["LightChart"]),
+            targets: ["LightChart"]
+        )
     ],
     dependencies: [],
     targets: [
         .target(
             name: "LightChart",
-            dependencies: []),
+            dependencies: []
+        ),
         .testTarget(
             name: "LightChartTests",
-            dependencies: ["LightChart"]),
+            dependencies: ["LightChart"]
+        )
     ]
 )

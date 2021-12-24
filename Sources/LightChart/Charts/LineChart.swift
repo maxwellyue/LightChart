@@ -136,3 +136,23 @@ public struct LineChart: View {
 }
 
 extension LineChart: DataRepresentable { }
+
+struct LineChart_Previews: PreviewProvider {
+
+    static let data: [Double] = [50, 52, 50, 51, 45, 62, 58, 64, 58, 70, 68, 79, 72, 85]
+    
+    static var previews: some View {
+        Group {
+            LineChart(
+                data: data,
+                frame: CGRect(
+                    x: 0,
+                    y: 0,
+                    width: 200,
+                    height: 150)
+            )
+        }
+        .padding()
+        .previewLayout(.sizeThatFits)
+    }
+}

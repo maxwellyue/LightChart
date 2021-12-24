@@ -9,13 +9,26 @@ import Foundation
 import CoreGraphics
 
 protocol DataRepresentable {
-    func points(forData data: [Double], frame: CGRect, offset: Double, lineWidth: CGFloat) -> [CGPoint]
+
+    func points(
+        forData data: [Double],
+        frame: CGRect,
+        offset: Double,
+        lineWidth: CGFloat
+    ) -> [CGPoint]
+
     func lineWidth(visualType: ChartVisualType) -> CGFloat
 }
 
 extension DataRepresentable {
     
-    func points(forData data: [Double], frame: CGRect, offset: Double, lineWidth: CGFloat) -> [CGPoint] {
+    func points(
+        forData data: [Double],
+        frame: CGRect,
+        offset: Double,
+        lineWidth: CGFloat
+    ) -> [CGPoint] {
+
         var vector = Math.stretchOut(Math.norm(data))
         if offset != 0 {
             vector = Math.stretchIn(vector, offset: offset)

@@ -1,5 +1,5 @@
 //
-//  File.swift
+//  CurvedChart.swift
 //  
 //
 //  Created by Alexey Pichukov on 20.08.2020.
