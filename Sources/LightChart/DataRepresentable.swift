@@ -7,6 +7,7 @@
 
 import CoreGraphics
 import Foundation
+import SwiftUI
 
 protocol DataRepresentable {
     func points(forData data: [Double?], frame: CGRect, offset: Double, lineWidth: CGFloat) -> [CGPoint]
@@ -22,7 +23,7 @@ extension DataRepresentable {
         }
         var points: [CGPoint] = []
         let isSame = sameValues(in: vector)
-        
+
         // get x values
         var xs = [Int]()
         for i in 0..<data.count {
@@ -30,16 +31,16 @@ extension DataRepresentable {
                 xs.append(i)
             }
         }
-        
+
         for i in 0..<vector.count {
-            let x = frame.size.width / CGFloat(vector.count - 1) * CGFloat(xs[i])
-            
+            let x = frame.size.width / CGFloat(data.count - 1) * CGFloat(xs[i])
+
             let y = isSame ? frame.size.height / 2 : (frame.size.height - lineWidth) * CGFloat(vector[i]) + lineWidth / 2
             points.append(CGPoint(x: x, y: y))
         }
         return points
     }
-    
+
     func lineWidth(visualType: ChartVisualType) -> CGFloat {
         switch visualType {
             case .outline(_, let lineWidth):
@@ -50,7 +51,7 @@ extension DataRepresentable {
                 return lineWidth
         }
     }
-    
+
     private func sameValues(in vector: [Double]) -> Bool {
         guard let prev = vector.first else {
             return true
@@ -61,5 +62,16 @@ extension DataRepresentable {
             }
         }
         return true
+    }
+}
+
+struct LightChartView_Previews: PreviewProvider {
+    static var previews: some View {
+        LightChartView(data: [12, 14, nil, nil, nil, 18, 10, 16],
+                       type: .curved,
+                       visualType: .filled(color: .accentColor, lineWidth: 4),
+                       currentValueLineType: .dash(color: .accentColor, lineWidth: 1, dash: [4]))
+            .frame(height: 300)
+            .padding()
     }
 }

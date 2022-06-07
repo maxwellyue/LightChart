@@ -6,7 +6,7 @@ public struct LightChartView: View {
     private let visualType: ChartVisualType
     private let offset: Double
     private let currentValueLineType: CurrentValueLineType
-    
+
     public init(data: [Double?],
                 type: ChartType = .line,
                 visualType: ChartVisualType = .outline(color: .red, lineWidth: 2),
@@ -19,7 +19,7 @@ public struct LightChartView: View {
         self.offset = offset
         self.currentValueLineType = currentValueLineType
     }
-    
+
     public var body: some View {
         GeometryReader { reader in
             chart(withFrame: CGRect(x: 0,
@@ -28,7 +28,7 @@ public struct LightChartView: View {
                                     height: reader.frame(in: .local).height))
         }
     }
-    
+
     private func chart(withFrame frame: CGRect) -> AnyView {
         switch type {
             case .line:

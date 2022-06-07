@@ -1,6 +1,6 @@
 //
 //  File.swift
-//  
+//
 //
 //  Created by Alexey Pichukov on 20.08.2020.
 //
@@ -8,7 +8,6 @@
 import SwiftUI
 
 public struct CurvedChart: View {
-    
     private let data: [Double?]
     private let frame: CGRect
     private let offset: Double
@@ -30,7 +29,8 @@ public struct CurvedChart: View {
                 frame: CGRect,
                 visualType: ChartVisualType = .outline(color: .red, lineWidth: 2),
                 offset: Double = 0,
-                currentValueLineType: CurrentValueLineType = .none) {
+                currentValueLineType: CurrentValueLineType = .none)
+    {
         self.data = data
         self.frame = frame
         self.type = visualType
@@ -102,7 +102,7 @@ public struct CurvedChart: View {
     
     private func curvedPath(points: [CGPoint]) -> Path {
         func mid(_ point1: CGPoint, _ point2: CGPoint) -> CGPoint {
-            return CGPoint(x: (point1.x + point2.x) / 2, y:(point1.y + point2.y) / 2)
+            return CGPoint(x: (point1.x + point2.x) / 2, y: (point1.y + point2.y) / 2)
         }
         
         func control(_ point1: CGPoint, _ point2: CGPoint) -> CGPoint {
@@ -131,7 +131,7 @@ public struct CurvedChart: View {
             return path
         }
         
-        for i in 1..<points.count {
+        for i in 1 ..< points.count {
             let currentPoint = points[i]
             let midPoint = mid(startPoint, currentPoint)
             
@@ -167,4 +167,4 @@ public struct CurvedChart: View {
     }
 }
 
-extension CurvedChart: DataRepresentable { }
+extension CurvedChart: DataRepresentable {}
