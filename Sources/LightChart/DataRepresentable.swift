@@ -1,29 +1,39 @@
 //
 //  DataRepresentable.swift
-//  
+//
 //
 //  Created by Alexey Pichukov on 19.08.2020.
 //
 
-import Foundation
 import CoreGraphics
+import Foundation
 
 protocol DataRepresentable {
-    func points(forData data: [Double], frame: CGRect, offset: Double, lineWidth: CGFloat) -> [CGPoint]
+    func points(forData data: [Double?], frame: CGRect, offset: Double, lineWidth: CGFloat) -> [CGPoint]
     func lineWidth(visualType: ChartVisualType) -> CGFloat
 }
 
 extension DataRepresentable {
-    
-    func points(forData data: [Double], frame: CGRect, offset: Double, lineWidth: CGFloat) -> [CGPoint] {
-        var vector = Math.stretchOut(Math.norm(data))
+    func points(forData data: [Double?], frame: CGRect, offset: Double, lineWidth: CGFloat) -> [CGPoint] {
+        let dataNoNil = data.compactMap { $0 }
+        var vector = Math.stretchOut(Math.norm(dataNoNil))
         if offset != 0 {
             vector = Math.stretchIn(vector, offset: offset)
         }
         var points: [CGPoint] = []
         let isSame = sameValues(in: vector)
+        
+        // get x values
+        var xs = [Int]()
+        for i in 0..<data.count {
+            if data[i] != nil {
+                xs.append(i)
+            }
+        }
+        
         for i in 0..<vector.count {
-            let x = frame.size.width / CGFloat(vector.count - 1) * CGFloat(i)
+            let x = frame.size.width / CGFloat(vector.count - 1) * CGFloat(xs[i])
+            
             let y = isSame ? frame.size.height / 2 : (frame.size.height - lineWidth) * CGFloat(vector[i]) + lineWidth / 2
             points.append(CGPoint(x: x, y: y))
         }

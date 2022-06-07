@@ -9,7 +9,7 @@ import SwiftUI
 
 public struct LineChart: View {
     
-    private let data: [Double]
+    private let data: [Double?]
     private let frame: CGRect
     private let offset: Double
     private let type: ChartVisualType
@@ -26,7 +26,7 @@ public struct LineChart: View {
     ///               For example `offset: 0.2` means that the chart will occupy 80% of the upper
     ///               part of the view
     ///     - currentValueLineType: A type of current value line (`none` for no line on chart)
-    public init(data: [Double],
+    public init(data: [Double?],
                 frame: CGRect,
                 visualType: ChartVisualType = .outline(color: .red, lineWidth: 2),
                 offset: Double = 0,
