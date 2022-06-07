@@ -1,6 +1,6 @@
 //
 //  ChartType.swift
-//  
+//
 //
 //  Created by Alexey Pichukov on 19.08.2020.
 //
@@ -22,4 +22,9 @@ public enum CurrentValueLineType {
     case none
     case line(color: Color, lineWidth: CGFloat)
     case dash(color: Color, lineWidth: CGFloat, dash: [CGFloat])
+}
+
+public enum DotLabelType {
+    case none
+    case circle(color: Color?, lineWidth: CGFloat?)
 }

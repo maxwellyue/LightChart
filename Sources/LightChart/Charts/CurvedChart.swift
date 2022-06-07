@@ -14,7 +14,8 @@ public struct CurvedChart: View {
     private let type: ChartVisualType
     private let currentValueLineType: CurrentValueLineType
     private var points: [CGPoint] = []
-    
+    private let dotLabelType: DotLabelType
+
     /// Creates a new `CurvedChart`
     ///
     /// - Parameters:
@@ -28,6 +29,7 @@ public struct CurvedChart: View {
     public init(data: [Double?],
                 frame: CGRect,
                 visualType: ChartVisualType = .outline(color: .red, lineWidth: 2),
+                dotLabelType: DotLabelType = .none,
                 offset: Double = 0,
                 currentValueLineType: CurrentValueLineType = .none)
     {
@@ -35,6 +37,7 @@ public struct CurvedChart: View {
         self.frame = frame
         self.type = visualType
         self.offset = offset
+        self.dotLabelType = dotLabelType
         self.currentValueLineType = currentValueLineType
         self.points = points(forData: data,
                              frame: frame,
@@ -52,6 +55,8 @@ public struct CurvedChart: View {
                 .rotationEffect(.degrees(180), anchor: .center)
                 .rotation3DEffect(.degrees(180), axis: (x: 0, y: 1, z: 0))
                 .drawingGroup()
+            
+            DotLabel(type: self.type, points: self.points, dotLabelType: self.dotLabelType)
         }
     }
     

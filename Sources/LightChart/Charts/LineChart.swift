@@ -1,6 +1,6 @@
 //
 //  LineChart.swift
-//  
+//
 //
 //  Created by Alexey Pichukov on 19.08.2020.
 //
@@ -8,13 +8,13 @@
 import SwiftUI
 
 public struct LineChart: View {
-    
     private let data: [Double?]
     private let frame: CGRect
     private let offset: Double
     private let type: ChartVisualType
     private let currentValueLineType: CurrentValueLineType
     private var points: [CGPoint] = []
+    private let dotLabelType: DotLabelType
     
     /// Creates a new `LineChart`
     ///
@@ -29,13 +29,16 @@ public struct LineChart: View {
     public init(data: [Double?],
                 frame: CGRect,
                 visualType: ChartVisualType = .outline(color: .red, lineWidth: 2),
+                dotLabelType: DotLabelType = .none,
                 offset: Double = 0,
-                currentValueLineType: CurrentValueLineType = .none) {
+                currentValueLineType: CurrentValueLineType = .none)
+    {
         self.data = data
         self.frame = frame
         self.type = visualType
         self.offset = offset
         self.currentValueLineType = currentValueLineType
+        self.dotLabelType = dotLabelType
         self.points = points(forData: data,
                              frame: frame,
                              offset: offset,
@@ -52,6 +55,8 @@ public struct LineChart: View {
                 .rotationEffect(.degrees(180), anchor: .center)
                 .rotation3DEffect(.degrees(180), axis: (x: 0, y: 1, z: 0))
                 .drawingGroup()
+            
+            DotLabel(type: self.type, points: self.points, dotLabelType: self.dotLabelType)
         }
     }
     
@@ -106,7 +111,7 @@ public struct LineChart: View {
             return path
         }
         path.move(to: points[0])
-        for i in 1..<points.count {
+        for i in 1 ..< points.count {
             path.addLine(to: points[i])
         }
         return path
@@ -135,4 +140,4 @@ public struct LineChart: View {
     }
 }
 
-extension LineChart: DataRepresentable { }
+extension LineChart: DataRepresentable {}

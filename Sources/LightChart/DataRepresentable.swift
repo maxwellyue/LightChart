@@ -67,11 +67,22 @@ extension DataRepresentable {
 
 struct LightChartView_Previews: PreviewProvider {
     static var previews: some View {
-        LightChartView(data: [12, 14, nil, nil, nil, 18, 10, 16],
-                       type: .curved,
-                       visualType: .filled(color: .accentColor, lineWidth: 4),
-                       currentValueLineType: .dash(color: .accentColor, lineWidth: 1, dash: [4]))
-            .frame(height: 300)
-            .padding()
+        VStack {
+            LightChartView(data: [12, 12, nil, nil, nil, 12, 10, 16],
+                           type: .curved,
+                           visualType: .filled(color: .accentColor, lineWidth: 3),
+                           dotLabelType: .circle(color: .accentColor, lineWidth: 3),
+                           currentValueLineType: .dash(color: .accentColor, lineWidth: 1, dash: [4]))
+                .frame(height: 200)
+                .padding()
+
+            LightChartView(data: [12, 12, nil, nil, nil, 12, 10, 16],
+                           type: .line,
+                           visualType: .filled(color: .accentColor, lineWidth: 3),
+                           dotLabelType: .circle(color: .accentColor, lineWidth: 3),
+                           currentValueLineType: .dash(color: .accentColor, lineWidth: 1, dash: [4]))
+                .frame(height: 200)
+                .padding()
+        }
     }
 }
