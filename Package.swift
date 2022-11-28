@@ -6,7 +6,8 @@ import PackageDescription
 let package = Package(
     name: "LightChart",
     platforms: [
-        .iOS(.v13)
+        .iOS(.v14),
+        .macOS(.v11)
     ],
     products: [
         .library(
@@ -21,5 +22,4 @@ let package = Package(
         .testTarget(
             name: "LightChartTests",
             dependencies: ["LightChart"]),
-    ]
-)
+    ])
